@@ -126,7 +126,7 @@ impl Client {
 }
 
 #[cfg(test)]
-mod tests {
+mod tests_modules {
     use super::*;
 
     #[test]
@@ -169,7 +169,6 @@ mod tests {
         dotenv::dotenv().ok();
         let client = Client::new(&std::env::var("OPEN_API_KEY").unwrap());
         let response = client.get_model_by_id("id").await;
-        println!("{:#?}", response);
         assert!(response.is_err());
     }
 }
