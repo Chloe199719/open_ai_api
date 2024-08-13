@@ -1,3 +1,5 @@
+#[cfg(feature = "chat")]
+pub mod chat_completion;
 #[cfg(feature = "models")]
 pub mod models;
 pub mod structs;
