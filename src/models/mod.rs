@@ -117,6 +117,7 @@ mod test_models {
     async fn get_models_one_model() {
         dotenv::dotenv().ok();
         let client = Client::new(&std::env::var("OPEN_API_KEY").unwrap());
+
         let response = client.get_models().await.unwrap();
         assert!(response.object == "list");
         let first_model = response.data.first().unwrap();
