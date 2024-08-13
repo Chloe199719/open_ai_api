@@ -70,6 +70,7 @@ impl Client {
     ///   }
     /// }
     /// ```
+
     pub async fn get_model_by_id(&self, id: &str) -> Result<ModelData, ClientError> {
         let response = self
             .client

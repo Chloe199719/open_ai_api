@@ -1,3 +1,10 @@
+#![warn(
+    clippy::all,
+    clippy::print_stdout,
+    clippy::arithmetic_side_effects,
+    clippy::as_conversions,
+    clippy::integer_division
+)]
 #[cfg(feature = "chat")]
 pub mod chat_completion;
 #[cfg(feature = "models")]
@@ -15,16 +22,18 @@ impl Default for Client {
     fn default() -> Self {
         Self {
             client: reqwest::Client::new(),
-            api_key: "".to_string(),
+            api_key: String::new(),
             base_url: "https://api.openai.com".to_string(),
         }
     }
 }
 
 impl Client {
+    #[must_use]
     pub fn new(api_key: &str) -> Self {
         Self::with_base_url(api_key, None)
     }
+    #[must_use]
     pub fn with_base_url(api_key: &str, base_url: Option<&str>) -> Self {
         match base_url {
             Some(base_url) => Self {
