@@ -29,7 +29,9 @@ reqwest = { version = "0.12.5", features = ["json", "cookies", "rustls-tls","mul
 thiserror = "1.0.63"
 
 [features]
-default = ["client", "chat", "models"]
+default = ["client", "chat","models"]
 client = []
 chat=["client"]
 models =["client"]
+
+
