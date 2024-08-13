@@ -21,7 +21,7 @@ impl Client {
     /// ```
     /// use open_ai_api::Client;
     /// #[tokio::main]
-    ///  async fn main() {
+    /// async fn main() {
     ///     dotenv::dotenv().ok();
     ///     let client = Client::new(&std::env::var("OPEN_API_KEY").unwrap());
     ///     let response = client.get_models().await;

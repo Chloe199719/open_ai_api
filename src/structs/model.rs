@@ -5,8 +5,8 @@ pub struct Model {
     pub object: String,
     pub data: Vec<ModelData>,
 }
-#[derive(Debug, Serialize, Deserialize)]
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct ModelData {
     pub id: String,
     pub object: String,
