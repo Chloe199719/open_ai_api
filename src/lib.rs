@@ -16,14 +16,57 @@ impl Client {
             api_key: api_key.to_string(),
         }
     }
-    pub async fn get_models(&self) -> Result<Model, reqwest::Error> {
-        self.client
+    /// Get all models
+    /// # Example
+    /// ```
+    /// use open_ai_api::Client;
+    /// #[tokio::main]
+    ///  async fn main() {
+    ///     dotenv::dotenv().ok();
+    ///     let client = Client::new(&std::env::var("OPEN_API_KEY").unwrap());
+    ///     let response = client.get_models().await;
+    ///     match response {
+    ///         Ok(model) => {
+    ///             println!("{:#?}", model);
+    ///         }
+    ///         Err(e) => {
+    ///             println!("{:#?}", e);
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    pub async fn get_models(&self) -> Result<Model, ErrorType> {
+        match self
+            .client
             .get("https://api.openai.com/v1/models")
             .header("Authorization", format!("Bearer {}", self.api_key))
             .send()
-            .await?
-            .json::<Model>()
             .await
+        {
+            Ok(response) => {
+                if response.status().is_success() {
+                    match response.json::<Model>().await {
+                        Ok(data) => Ok(data),
+                        Err(e) => Err(ErrorType::ReqwestError(e)),
+                    }
+                } else {
+                    match response.json::<Error>().await {
+                        Ok(error) => Err(ErrorType::ResponseError(error)),
+                        Err(_) => {
+                            return Err(ErrorType::ResponseError(Error {
+                                error: ErrorData {
+                                    param: "Unknown".to_string(),
+                                    message: "Unknown".to_string(),
+                                    error_type: "Unknown".to_string(),
+                                    code: "Unknown".to_string(),
+                                },
+                            }))
+                        }
+                    }
+                }
+            }
+            Err(e) => Err(ErrorType::ReqwestError(e)),
+        }
     }
     /// Get a model by id
     /// # Arguments
@@ -46,6 +89,7 @@ impl Client {
     ///       }
     ///   }
     /// }
+    /// ```
     pub async fn get_model_by_id(&self, id: &str) -> Result<ModelData, ErrorType> {
         match self
             .client
@@ -61,8 +105,6 @@ impl Client {
                         Err(e) => Err(ErrorType::ReqwestError(e)),
                     }
                 } else {
-                    // let re = response.text().await.unwrap();
-                    // panic!("{}", re);
                     match response.json::<Error>().await {
                         Ok(error) => Err(ErrorType::ResponseError(error)),
                         Err(_) => {
