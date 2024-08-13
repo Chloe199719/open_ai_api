@@ -100,6 +100,7 @@ impl Client {
 mod test_models_live {
     use crate::Client;
 
+    #[ignore = "This test requires a valid API key"]
     #[tokio::test]
     async fn get_models() {
         dotenv::dotenv().ok();
@@ -107,6 +108,7 @@ mod test_models_live {
         let response = client.get_models().await.unwrap();
         assert!(response.object == "list");
     }
+
     #[tokio::test]
     async fn get_models_not_valid_api_key() {
         let client = Client::new("api_key");
@@ -122,6 +124,7 @@ mod test_models_live {
             }
         }
     }
+    #[ignore = "This test requires a valid API key"]
     #[tokio::test]
     async fn get_models_one_model() {
         dotenv::dotenv().ok();
@@ -139,6 +142,7 @@ mod test_models_live {
         let response = client.get_models().await;
         assert!(response.is_err());
     }
+    #[ignore = "This test requires a valid API key"]
     #[tokio::test]
 
     async fn get_models_one_model_not_valid_id() {
