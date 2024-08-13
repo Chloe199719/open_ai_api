@@ -1,5 +1,9 @@
 # Rust Open AI API Library
 
+## IN DEVELOPMENT
+
+This Library is still in development apis are still unstable and may change.
+
 This library provides a convenient way to interact with the Open AI API using Rust. It allows you to easily integrate Open AI's powerful language models into your Rust applications.
 
 ## Installation
