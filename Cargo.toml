@@ -5,6 +5,7 @@ edition = "2021"
 authors = ["Chloe Pratas <chloevision97@gmail.com>"]
 description = "A simple wrapper for the OpenAI API"
 license = "MIT"
+repository = "https://github.com/Chloe199719/open_ai_api"
 [lib]
 path = "src/lib.rs"
 
