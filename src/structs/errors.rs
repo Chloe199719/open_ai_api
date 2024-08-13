@@ -24,7 +24,7 @@ pub enum ErrorType {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ErrorData {
-    pub param: String,
+    pub param: Option<String>,
     pub message: String,
     #[serde(rename = "type")]
     pub error_type: String,

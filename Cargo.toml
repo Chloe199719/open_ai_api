@@ -29,11 +29,13 @@ tracing-bunyan-formatter = "0.3"
 serde_json = { version = "1.0.107", features = ["raw_value"] }
 reqwest = { version = "0.12.5", features = ["json", "cookies", "rustls-tls","multipart"] }
 thiserror = "1.0.63"
-
+futures = "0.3.30"
 [features]
 default = ["client", "chat","models"]
 client = []
 chat=["client"]
 models =["client"]
 
+[dev-dependencies]
+mockito = "1.5.0"
 
