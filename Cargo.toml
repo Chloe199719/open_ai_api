@@ -1,0 +1,29 @@
+[package]
+name = "open_ai_api"
+version = "0.1.0"
+edition = "2021"
+authors = ["Chloe Pratas <chloevision97@gmail.com>"]
+
+[lib]
+path = "src/lib.rs"
+
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+dotenv = "0.15.0"
+
+
+uuid = { version = "1", features = ["serde", "v4"] }
+chrono = { version = "0.4.22", default-features = false, features = ["serde", "clock"] }
+tracing = { version ="0.1.40", features = ["log"] }
+tracing-subscriber = { version = "0.3", features = [    "fmt",
+    "std",
+    "env-filter",
+    "registry",
+    'json',
+    'tracing-log',] }
+tracing-bunyan-formatter = "0.3"
+serde_json = { version = "1.0.107", features = ["raw_value"] }
+reqwest = { version = "0.12.5", features = ["json", "cookies", "rustls-tls","multipart"] }
+
